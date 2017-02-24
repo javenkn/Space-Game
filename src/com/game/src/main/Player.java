@@ -23,6 +23,13 @@ public class Player {
 	public void tick() {
 		x += velX;
 		y += velY;
+		
+		System.out.println(x);
+		if(x <= 0) x = 0;
+		else if(x >= Game.WIDTH * Game.SCALE - 50) x = (Game.WIDTH * Game.SCALE) - 50;
+		
+		if(y <= 0) y = 0;
+		else if(y >= Game.HEIGHT * Game.SCALE - 65) y = (Game.HEIGHT * Game.SCALE) - 65;
 	}
 	
 	public void render(Graphics g) {
