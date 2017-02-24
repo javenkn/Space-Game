@@ -21,6 +21,8 @@ public class Game extends Canvas implements Runnable{
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	
+	private Player p = new Player(200, 200);
+	
 	private synchronized void start() { // utilizes threads to start the game
 		if(running)
 			return;
@@ -79,7 +81,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void tick() {
-		
+		p.tick();
 	}
 	
 	private void render() {
@@ -92,6 +94,8 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics(); // initializes graphics variable
 		
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+		p.render(g);
 		
 		g.dispose(); // shows the graphics
 		bs.show();
@@ -116,4 +120,5 @@ public class Game extends Canvas implements Runnable{
 		
 		game.start();
 	}
+	
 }
