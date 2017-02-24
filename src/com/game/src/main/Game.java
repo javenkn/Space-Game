@@ -20,8 +20,13 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private Player p;
 	
-	private Player p = new Player(200, 200);
+	public Game () { // constructor - initializes everything
+		
+		p = new Player(200, 200);
+		this.addKeyListener(new KeyInput(p));
+	}
 	
 	private synchronized void start() { // utilizes threads to start the game
 		if(running)
@@ -48,6 +53,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void run() {
+		this.requestFocus(); // makes it so that you don't have to click on screen to move
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
 		double ns = 1000000000 / amountOfTicks;
