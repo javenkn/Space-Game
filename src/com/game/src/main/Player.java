@@ -7,6 +7,9 @@ public class Player {
 	private double x;
 	private double y;
 	
+	private double velX = 0;
+	private double velY = 0;
+	
 	private BufferedImage player;
 	BufferedImageLoader loader = new BufferedImageLoader();
 	
@@ -18,6 +21,8 @@ public class Player {
 	}
 	
 	public void tick() {
+		x += velX;
+		y += velY;
 	}
 	
 	public void render(Graphics g) {
@@ -38,5 +43,21 @@ public class Player {
 	
 	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public double getVelX(double velX) {
+		return velX;
+	}
+	
+	public void setVelX(double velX) {
+		this.velX = velX;
+	}
+	
+	public double getVelY(double velY) {
+		return velY;
+	}
+	
+	public void setVelY(double velY) {
+		this.velY = velY;
 	}
 }
