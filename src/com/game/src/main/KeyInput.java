@@ -6,10 +6,13 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter{
 	
 	private Player player;
+	private Controller controller;
 	private boolean[] keyDown = new boolean[4];
 
-	public KeyInput(Player player) {
+	public KeyInput(Player player, Controller controller) {
 		this.player = player;
+		this.controller = controller;
+		
 		for(int i = 0; i < keyDown.length; i++) {
 			keyDown[i] = false;
 		}
@@ -35,6 +38,9 @@ public class KeyInput extends KeyAdapter{
 			keyDown[3] = true;
 		}
 		
+		if(key == KeyEvent.VK_SPACE) { // shoots bullets
+			controller.addBullet(new Bullet(player.getX() + 17, player.getY() - 8));
+		}
 		if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 	}
 	

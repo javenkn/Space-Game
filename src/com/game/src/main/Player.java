@@ -36,6 +36,8 @@ public class Player {
 		g.drawImage(player, (int) x, (int) y, null);
 	}
 	
+	// Getters and Setters
+	
 	public double getX() {
 		return x;
 	}

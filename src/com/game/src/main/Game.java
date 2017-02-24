@@ -20,12 +20,16 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-	private Player p;
+	private Player player;
+	private Controller controller;
 	
 	public Game () { // constructor - initializes everything
 		
-		p = new Player(200, 200);
-		this.addKeyListener(new KeyInput(p));
+		player = new Player(((WIDTH*SCALE)/2) - 30, 350);
+		controller = new Controller();
+		
+		// attaches keyboard listener
+		this.addKeyListener(new KeyInput(player, controller));
 	}
 	
 	private synchronized void start() { // utilizes threads to start the game
@@ -87,7 +91,8 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void tick() {
-		p.tick();
+		player.tick();
+		controller.tick();
 	}
 	
 	private void render() {
@@ -101,7 +106,8 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics(); // initializes graphics variable
 		
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-		p.render(g);
+		player.render(g);
+		controller.render(g);
 		
 		g.dispose(); // shows the graphics
 		bs.show();
