@@ -24,7 +24,6 @@ public class Player {
 		x += velX;
 		y += velY;
 		
-		System.out.println(x);
 		if(x <= 0) x = 0;
 		else if(x >= Game.WIDTH * Game.SCALE - 50) x = (Game.WIDTH * Game.SCALE) - 50;
 		

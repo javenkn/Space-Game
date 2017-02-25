@@ -19,15 +19,20 @@ public class Game extends Canvas implements Runnable{
 	private boolean running = false;
 	private Thread thread;
 	
-	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private BufferedImageLoader loader;
+	
+//	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private Player player;
 	private Controller controller;
+	private BufferedImage background;
 	
 	public Game () { // constructor - initializes everything
 		
+		loader = new BufferedImageLoader();
 		player = new Player(((WIDTH*SCALE)/2) - 30, 350);
 		controller = new Controller();
 		
+		background = loader.loadImage("/Sprites/starstars.jpg");
 		// attaches keyboard listener
 		this.addKeyListener(new KeyInput(player, controller));
 	}
@@ -105,7 +110,8 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics(); // initializes graphics variable
 		
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+		
 		player.render(g);
 		controller.render(g);
 		
