@@ -11,9 +11,8 @@ public class Player {
 	private double velY = 0;
 	
 	private BufferedImage player;
-	BufferedImageLoader loader = new BufferedImageLoader();
 	
-	public Player(double x, double y) {
+	public Player(double x, double y, BufferedImageLoader loader) {
 		this.x = x;
 		this.y = y;
 		

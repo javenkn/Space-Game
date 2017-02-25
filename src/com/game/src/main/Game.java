@@ -21,16 +21,17 @@ public class Game extends Canvas implements Runnable{
 	
 	private BufferedImageLoader loader;
 	
-//	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private Player player;
 	private Controller controller;
 	private BufferedImage background;
+	private HUD hud;
 	
 	public Game () { // constructor - initializes everything
 		
+		hud = new HUD();
 		loader = new BufferedImageLoader();
-		player = new Player(((WIDTH*SCALE)/2) - 30, 350);
-		controller = new Controller();
+		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader);
+		controller = new Controller(loader, hud);
 		
 		background = loader.loadImage("/Sprites/starstars.jpg");
 		// attaches keyboard listener
@@ -96,8 +97,9 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void tick() {
-		player.tick();
 		controller.tick();
+		player.tick();
+		hud.tick();
 	}
 	
 	private void render() {
@@ -112,8 +114,9 @@ public class Game extends Canvas implements Runnable{
 		
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		
-		player.render(g);
 		controller.render(g);
+		player.render(g);
+		hud.render(g);
 		
 		g.dispose(); // shows the graphics
 		bs.show();
