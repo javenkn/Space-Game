@@ -11,13 +11,14 @@ public class Controller {
 	Random r = new Random();
 	BufferedImageLoader loader;
 	GameObject tempObject;
+
+	private HUD hud;
 	
 	public Controller(BufferedImageLoader loader, HUD hud) {
+		this.hud = hud;
+		this.loader = loader;
 		
-		for(int i = 0; i < hud.getEnemyCount(); i++) {
-			addGameObject(new Enemy(r.nextInt((Game.WIDTH * Game.SCALE) - 56), 0, loader, ID.Enemy));
-		}
-		
+		createEnemies(hud.getEnemyCount());
 	}
 	
 	public void tick() {
@@ -33,6 +34,13 @@ public class Controller {
 			tempObject = gameObjectList.get(i);
 			
 			tempObject.render(g);
+		}
+	}
+	
+	public void createEnemies(int enemies) {
+		System.out.println(enemies);
+		for(int i = 0; i < enemies; i++) {
+			addGameObject(new Enemy(r.nextInt((Game.WIDTH * Game.SCALE) - 56), 0, loader, ID.Enemy, this, hud));
 		}
 	}
 	

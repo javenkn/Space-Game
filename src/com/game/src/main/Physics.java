@@ -17,8 +17,8 @@ public class Physics {
 						return true;
 					}
 				}
-			case Bullet:
-				if(tempObject.getID() == ID.Enemy) {
+			case Enemy:
+				if(tempObject.getID() == ID.Bullet) {
 					if(entity.getBounds().intersects(tempObject.getBounds())) { //tempObject = basic enemy
 						return true;
 					}

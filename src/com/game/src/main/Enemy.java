@@ -10,9 +10,14 @@ public class Enemy extends GameObject {
 	private BufferedImage enemy;
 	Random r = new Random();
 	private double speed = r.nextDouble() * (0.4) + 0.1;
+	private Controller controller;
+	private HUD hud;
 	
-	public Enemy(double x, double y, BufferedImageLoader loader, ID id) {
+	public Enemy(double x, double y, BufferedImageLoader loader, ID id, Controller controller, HUD hud) {
 		super(x, y, id);
+		
+		this.controller = controller;
+		this.hud = hud;
 		
 		enemy = loader.loadImage("/Sprites/roundysh.png");
 	}
@@ -24,6 +29,12 @@ public class Enemy extends GameObject {
 		}
 		y += speed;
 		this.setY(y);
+		
+		if(Physics.collision(this, controller.getGameObjectList())) {
+			controller.removeGameObject(this);
+			hud.setEnemiesKilled(hud.getEnemiesKilled() + 1);
+			hud.setRealEnemiesKilled(hud.getRealEnemiesKilled() + 1);
+		}
 	}
 	
 	public void render(Graphics g) {

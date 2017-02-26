@@ -99,7 +99,11 @@ public class Game extends Canvas implements Runnable{
 	private void tick() {
 		controller.tick();
 		player.tick();
-		hud.tick();
+		if(hud.getEnemiesKilled() >= hud.getEnemyCount()) {
+			hud.setEnemyCount(hud.getEnemyCount() + 2);
+			hud.setEnemiesKilled(0);
+			controller.createEnemies(hud.getEnemyCount());
+		}
 	}
 	
 	private void render() {

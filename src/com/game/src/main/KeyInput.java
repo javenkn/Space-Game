@@ -39,7 +39,7 @@ public class KeyInput extends KeyAdapter{
 		}
 		
 		if(key == KeyEvent.VK_SPACE) { // shoots bullets
-			controller.addGameObject(new Bullet(player.getX() + 17, player.getY() - 8, ID.Bullet, controller.getGameObjectList()));
+			controller.addGameObject(new Bullet(player.getX() + 17, player.getY() - 8, ID.Bullet));
 		}
 		if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 	}

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 public class HUD {
 	
 	private int enemyCount = 5;
+	private int realEnemiesKilled = 0;
 	private int enemiesKilled = 0;
 	
 	public void tick() {
@@ -14,7 +15,7 @@ public class HUD {
 	
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.drawString("Enemies Killed: " + enemiesKilled, 15, 64);
+		g.drawString("Enemies Killed: " + realEnemiesKilled, 15, 64);
 	}
 
 	public int getEnemyCount() {
@@ -31,5 +32,13 @@ public class HUD {
 
 	public void setEnemiesKilled(int enemiesKilled) {
 		this.enemiesKilled = enemiesKilled;
+	}
+	
+	public int getRealEnemiesKilled() {
+		return realEnemiesKilled;
+	}
+
+	public void setRealEnemiesKilled(int enemies) {
+		this.realEnemiesKilled = enemies;
 	}
 }
