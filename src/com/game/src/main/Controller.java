@@ -43,4 +43,8 @@ public class Controller {
 	public void removeGameObject(GameObject object) {
 		gameObjectList.remove(object);
 	}
+	
+	public LinkedList<GameObject> getGameObjectList() {
+		return gameObjectList;
+	}
 }

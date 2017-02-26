@@ -1,6 +1,7 @@
 package com.game.src.main;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -27,5 +28,9 @@ public class Enemy extends GameObject {
 	
 	public void render(Graphics g) {
 		g.drawImage(enemy, (int) x, (int) y, null);
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int) x, (int) y, 56, 60);
 	}
 }

@@ -1,7 +1,9 @@
 package com.game.src.main;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.LinkedList;;
 
 public class Player extends GameObject{
 	
@@ -9,9 +11,11 @@ public class Player extends GameObject{
 	private double velY = 0;
 	
 	private BufferedImage player;
+	private LinkedList<GameObject> gameObjectList;
 	
-	public Player(double x, double y, BufferedImageLoader loader, ID id) {
+	public Player(double x, double y, BufferedImageLoader loader, ID id, LinkedList<GameObject> gameObjectList) {
 		super(x, y, id);
+		this.gameObjectList = gameObjectList;
 		
 		player = loader.loadImage("/Sprites/bgbattleship.png");
 	}
@@ -25,6 +29,10 @@ public class Player extends GameObject{
 		
 		if(y <= 0) y = 0;
 		else if(y >= Game.HEIGHT * Game.SCALE - 65) y = (Game.HEIGHT * Game.SCALE) - 65;
+		
+		if(Physics.collision(this, gameObjectList)) {
+			System.out.println("Collision detected");
+		}
 	}
 	
 	public void render(Graphics g) {
@@ -32,22 +40,6 @@ public class Player extends GameObject{
 	}
 	
 	// Getters and Setters
-	
-	public double getX() {
-		return x;
-	}
-	
-	public double getY() {
-		return y;
-	}
-	
-	public void setX(double x) {
-		this.x = x;
-	}
-	
-	public void setY(double y) {
-		this.y = y;
-	}
 	
 	public double getVelX(double velX) {
 		return velX;
@@ -63,5 +55,9 @@ public class Player extends GameObject{
 	
 	public void setVelY(double velY) {
 		this.velY = velY;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle((int) x, (int) y, 50, 65);
 	}
 }
