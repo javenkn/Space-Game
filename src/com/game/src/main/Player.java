@@ -3,18 +3,15 @@ package com.game.src.main;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;;
 
-public class Player {
-	private double x;
-	private double y;
+public class Player extends GameObject{
 	
 	private double velX = 0;
 	private double velY = 0;
 	
 	private BufferedImage player;
 	
-	public Player(double x, double y, BufferedImageLoader loader) {
-		this.x = x;
-		this.y = y;
+	public Player(double x, double y, BufferedImageLoader loader, ID id) {
+		super(x, y, id);
 		
 		player = loader.loadImage("/Sprites/bgbattleship.png");
 	}

@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Enemy extends GameObject {
-	private double x, y;
 	
 	private BufferedImage enemy;
 	Random r = new Random();
@@ -13,10 +12,6 @@ public class Enemy extends GameObject {
 	
 	public Enemy(double x, double y, BufferedImageLoader loader, ID id) {
 		super(x, y, id);
-		
-		this.x = x;
-		this.y = y;
-		this.id = id;
 		
 		enemy = loader.loadImage("/Sprites/roundysh.png");
 	}

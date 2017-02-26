@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 		
 		hud = new HUD();
 		loader = new BufferedImageLoader();
-		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader);
+		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader, ID.Player);
 		controller = new Controller(loader, hud);
 		
 		background = loader.loadImage("/Sprites/starstars.jpg");
