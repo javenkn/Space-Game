@@ -25,17 +25,28 @@ public class Game extends Canvas implements Runnable{
 	private Controller controller;
 	private BufferedImage background;
 	private HUD hud;
+	private Menu menu;
+	
+	public enum STATE {
+		Menu,
+		Help,
+		Game
+	};
+	
+	public static STATE gameState = STATE.Menu;
 	
 	public Game () { // constructor - initializes everything
 		
 		hud = new HUD();
 		loader = new BufferedImageLoader();
 		controller = new Controller(loader, hud);
+		menu = new Menu();
 		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader, ID.Player, controller.getGameObjectList());
 		
 		background = loader.loadImage("/Sprites/starstars.jpg");
 		// attaches keyboard listener
 		this.addKeyListener(new KeyInput(player, controller));
+		this.addMouseListener(menu);
 	}
 	
 	private synchronized void start() { // utilizes threads to start the game
@@ -97,12 +108,14 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	private void tick() {
-		controller.tick();
-		player.tick();
-		if(hud.getEnemiesKilled() >= hud.getEnemyCount()) {
-			hud.setEnemyCount(hud.getEnemyCount() + 2);
-			hud.setEnemiesKilled(0);
-			controller.createEnemies(hud.getEnemyCount());
+		if(gameState == STATE.Game) {
+			controller.tick();
+			player.tick();
+			if(hud.getEnemiesKilled() >= hud.getEnemyCount()) {
+				hud.setEnemyCount(hud.getEnemyCount() + 2);
+				hud.setEnemiesKilled(0);
+				controller.createEnemies(hud.getEnemyCount());
+			}
 		}
 	}
 	
@@ -118,9 +131,13 @@ public class Game extends Canvas implements Runnable{
 		
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
 		
-		controller.render(g);
-		player.render(g);
-		hud.render(g);
+		if(gameState == STATE.Game) { // game state
+			controller.render(g);
+			player.render(g);
+			hud.render(g);
+		} else if(gameState == STATE.Menu || gameState == STATE.Help) {
+			menu.render(g);
+		}
 		
 		g.dispose(); // shows the graphics
 		bs.show();

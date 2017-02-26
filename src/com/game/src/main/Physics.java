@@ -12,14 +12,14 @@ public class Physics {
 			
 			switch(entity.getID()) {
 			case Player:
-				if(tempObject.getID() == ID.Enemy) {
-					if(entity.getBounds().intersects(tempObject.getBounds())) { //tempObject = basic enemy
+				if(tempObject.getID() == ID.Enemy) { // if the player hits the enemy
+					if(entity.getBounds().intersects(tempObject.getBounds())) {
 						return true;
 					}
 				}
 			case Enemy:
-				if(tempObject.getID() == ID.Bullet) {
-					if(entity.getBounds().intersects(tempObject.getBounds())) { //tempObject = basic enemy
+				if(tempObject.getID() == ID.Bullet) { // if the enemy gets hit by a bullet
+					if(entity.getBounds().intersects(tempObject.getBounds())) {
 						return true;
 					}
 				}

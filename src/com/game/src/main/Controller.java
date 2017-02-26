@@ -18,7 +18,7 @@ public class Controller {
 		this.hud = hud;
 		this.loader = loader;
 		
-		createEnemies(hud.getEnemyCount());
+		createEnemies(hud.getEnemyCount()); // creates the initial amount of enemies
 	}
 	
 	public void tick() {
@@ -38,7 +38,6 @@ public class Controller {
 	}
 	
 	public void createEnemies(int enemies) {
-		System.out.println(enemies);
 		for(int i = 0; i < enemies; i++) {
 			addGameObject(new Enemy(r.nextInt((Game.WIDTH * Game.SCALE) - 56), 0, loader, ID.Enemy, this, hud));
 		}

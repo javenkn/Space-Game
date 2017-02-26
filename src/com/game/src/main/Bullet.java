@@ -9,12 +9,10 @@ public class Bullet extends GameObject{
 
 	BufferedImageLoader loader = new BufferedImageLoader();
 	BufferedImage bullet;
-//	private LinkedList<GameObject> gameObjectList;
 	
 	public Bullet(double x, double y, ID id) {
 		super(x, y, id);
-
-//		this.gameObjectList = gameObjectList;
+		
 		bullet = loader.loadImage("/Sprites/bullet.png");
 	}
 	
@@ -26,7 +24,7 @@ public class Bullet extends GameObject{
 		g.drawImage(bullet, (int) x, (int) y, null);
 	}
 
-	public Rectangle getBounds() {
+	public Rectangle getBounds() { // collision box
 		return new Rectangle((int) x, (int) y, 15, 29);
 	}
 }

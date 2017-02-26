@@ -31,7 +31,7 @@ public class Player extends GameObject{
 		else if(y >= Game.HEIGHT * Game.SCALE - 65) y = (Game.HEIGHT * Game.SCALE) - 65;
 		
 		if(Physics.collision(this, gameObjectList)) {
-			System.out.println("Collision detected");
+			// health bar stuff
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class Player extends GameObject{
 		this.velY = velY;
 	}
 	
-	public Rectangle getBounds() {
+	public Rectangle getBounds() { // collision box
 		return new Rectangle((int) x, (int) y, 50, 65);
 	}
 }

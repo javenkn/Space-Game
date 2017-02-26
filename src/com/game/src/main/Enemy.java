@@ -31,8 +31,8 @@ public class Enemy extends GameObject {
 		this.setY(y);
 		
 		if(Physics.collision(this, controller.getGameObjectList())) {
-			controller.removeGameObject(this);
-			hud.setEnemiesKilled(hud.getEnemiesKilled() + 1);
+			controller.removeGameObject(this); // removes enemy
+			hud.setEnemiesKilled(hud.getEnemiesKilled() + 1); // increments enemy count by 1
 			hud.setRealEnemiesKilled(hud.getRealEnemiesKilled() + 1);
 		}
 	}
@@ -41,7 +41,7 @@ public class Enemy extends GameObject {
 		g.drawImage(enemy, (int) x, (int) y, null);
 	}
 	
-	public Rectangle getBounds() {
+	public Rectangle getBounds() { // collision box
 		return new Rectangle((int) x, (int) y, 56, 60);
 	}
 }
