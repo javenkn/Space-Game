@@ -85,12 +85,24 @@ public class Menu extends MouseAdapter{
 	
 	public void render(Graphics g) {
 		if(Game.gameState == STATE.Menu) {
-			Font font = new Font("arial", 1, 50);
+			Font font = new Font("arial", 1, 55);
 			Font font2 = new Font("arial", 1, 30);
+			int x = 120, y = 90;
 			
-			g.setFont(font);
+			for (int i = 0; i < 5; i++) {
+				g.setFont(font);
+				g.setColor(Color.GRAY);
+				g.drawString("Space Invasion", ShiftEast(x, i), ShiftNorth(ShiftSouth(y, i), 1));
+				g.setColor(Color.GRAY);
+				g.drawString("Space Invasion", ShiftWest(ShiftEast(x, i), 1), ShiftSouth(y, i));
+			}
+			
+			g.setColor(Color.WHITE);
+			g.drawString("Space Invasion", ShiftEast(x, 5), ShiftSouth(y, 5));
+			
+//			g.setFont(font);
 			g.setColor(Color.white);
-			g.drawString("Space Invasion", 130, 70);
+//			g.drawString("Space Invasion", 130, 70);
 			
 			g.setFont(font2);
 			g.drawRect(220, 150, 200, 64);
@@ -141,5 +153,18 @@ public class Menu extends MouseAdapter{
 			g.drawRect(220, 350, 200, 64);
 			g.drawString("Main Menu", 243, 390);
 		}
+	}
+	
+	public int ShiftNorth(int p, int distance) {
+		return (p - distance);
+	}
+	public int ShiftSouth(int p, int distance) {
+		return (p + distance);
+	}
+	public int ShiftEast(int p, int distance) {
+		return (p + distance);
+	}
+	public int ShiftWest(int p, int distance) {
+		return (p - distance);
 	}
 }
