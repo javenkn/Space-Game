@@ -3,6 +3,8 @@ package com.game.src.main;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import com.game.src.main.Game.STATE;
+
 public class KeyInput extends KeyAdapter{
 	
 	private Controller controller;
@@ -39,13 +41,19 @@ public class KeyInput extends KeyAdapter{
 					tempObject.setVelX(5); // when right key is pressed
 					keyDown[3] = true;
 				}
-				
-				if(key == KeyEvent.VK_SPACE) { // shoots bullets
-					controller.addGameObject(new Bullet(tempObject.getX() + 17, tempObject.getY() - 8, ID.Bullet));
+				if(!Game.paused) { 
+					if(key == KeyEvent.VK_SPACE) { // shoots bullets
+						controller.addGameObject(new Bullet(tempObject.getX() + 17, tempObject.getY() - 8, ID.Bullet));
+					}
 				}
 			}
 		}
-		
+		if(key == KeyEvent.VK_P) {
+			if(Game.gameState == STATE.Game) {
+				if(Game.paused) Game.paused = false;
+				else Game.paused = true;
+			}
+		}
 		if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 	}
 	

@@ -1,7 +1,9 @@
 package com.game.src.main;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -16,6 +18,7 @@ public class Game extends Canvas implements Runnable{
 	public static final int SCALE = 2;
 	public final String TITLE = "2D Space Game";
 	
+	public static boolean paused = false;
 	private boolean running = false;
 	private Thread thread;
 	
@@ -28,6 +31,7 @@ public class Game extends Canvas implements Runnable{
 	
 	public enum STATE {
 		Menu,
+		Pause,
 		Help,
 		Game,
 		End
@@ -108,17 +112,19 @@ public class Game extends Canvas implements Runnable{
 	
 	private void tick() {
 		if(gameState == STATE.Game) {
-			controller.tick();
-			
-			if(HUD.HEALTH <= 0) {
-				HUD.HEALTH = 100;
-				gameState = STATE.End;
-			}
-			
-			if(hud.getEnemiesKilled() >= hud.getEnemyCount()) {
-				hud.setEnemyCount(hud.getEnemyCount() + 2);
-				hud.setEnemiesKilled(0);
-				controller.createEnemies(hud.getEnemyCount());
+			if(!paused) {
+				controller.tick();
+				
+				if(HUD.HEALTH <= 0) {
+					HUD.HEALTH = 100;
+					gameState = STATE.End;
+				}
+				
+				if(hud.getEnemiesKilled() >= hud.getEnemyCount()) {
+					hud.setEnemyCount(hud.getEnemyCount() + 2);
+					hud.setEnemiesKilled(0);
+					controller.createEnemies(hud.getEnemyCount());
+				}
 			}
 		}
 	}
@@ -138,6 +144,12 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game) { // game state
 			controller.render(g);
 			hud.render(g);
+			if(paused) {
+				Font font = new Font("arial", 1, 30);
+				g.setFont(font);
+				g.setColor(Color.WHITE);
+				g.drawString("Paused", (WIDTH*SCALE)/2 - 60, (HEIGHT*SCALE)/2 - 30);
+			}
 		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
 			menu.render(g);
 		}
