@@ -38,7 +38,7 @@ public class Enemy extends GameObject {
 			GameObject tempObject = gameObjectList.get(i);
 			
 			if(Physics.collision(this, tempObject)) {
-				controller.removeGameObject(tempObject);
+				controller.removeGameObject(tempObject); // removes bullet when collision happens
 				controller.removeGameObject(this); // removes enemy
 				hud.setEnemiesKilled(hud.getEnemiesKilled() + 1); // increments enemy count by 1
 				hud.setRealEnemiesKilled(hud.getRealEnemiesKilled() + 1);

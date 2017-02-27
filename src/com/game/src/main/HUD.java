@@ -9,11 +9,22 @@ public class HUD {
 	private int realEnemiesKilled = 0;
 	private int enemiesKilled = 0;
 	
+	public static float HEALTH = 100;
+	private float greenValue = 255f;
+	public int bounds = 0;
+	
 	public void tick() {
 		
 	}
 	
 	public void render(Graphics g) {
+		g.setColor(Color.gray);
+		g.fillRect(15, 15, 200 + bounds, 32);
+		g.setColor(new Color(75, (int) greenValue, 0));
+		g.fillRect(15, 15, (int) (HEALTH * 2), 32);
+		g.setColor(Color.white);
+		g.drawRect(15, 15, 200 + bounds, 32);
+		
 		g.setColor(Color.WHITE);
 		g.drawString("Enemies Killed: " + realEnemiesKilled, 15, 64);
 	}

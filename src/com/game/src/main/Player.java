@@ -12,9 +12,14 @@ public class Player extends GameObject{
 	
 	private BufferedImage player;
 	private LinkedList<GameObject> gameObjectList;
+	private Controller controller;
+	private HUD hud;
 	
-	public Player(double x, double y, BufferedImageLoader loader, ID id, Controller controller) {
+	public Player(double x, double y, BufferedImageLoader loader, ID id, Controller controller, HUD hud) {
 		super(x, y, id);
+
+		this.controller = controller;
+		this.hud = hud;
 		
 		player = loader.loadImage("/Sprites/bgbattleship.png");
 		gameObjectList = controller.getGameObjectList();
@@ -35,7 +40,9 @@ public class Player extends GameObject{
 			GameObject tempObject = gameObjectList.get(i);
 			if(Physics.collision(this, tempObject)) {
 				// health stuff
-				System.out.println("COLLISION");
+				controller.removeGameObject(tempObject); // removes bullet when collision happens
+				HUD.HEALTH -= 10;
+				hud.setEnemiesKilled(hud.getEnemiesKilled() + 1);
 			}
 			
 		}

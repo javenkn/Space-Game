@@ -41,7 +41,7 @@ public class Game extends Canvas implements Runnable{
 		loader = new BufferedImageLoader();
 		controller = new Controller(loader, hud);
 		menu = new Menu();
-		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader, ID.Player, controller);
+		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader, ID.Player, controller, hud);
 		
 		background = loader.loadImage("/Sprites/starstars.jpg");
 		// attaches keyboard listener
