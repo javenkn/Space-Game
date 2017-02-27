@@ -13,11 +13,11 @@ public class Player extends GameObject{
 	private BufferedImage player;
 	private LinkedList<GameObject> gameObjectList;
 	
-	public Player(double x, double y, BufferedImageLoader loader, ID id, LinkedList<GameObject> gameObjectList) {
+	public Player(double x, double y, BufferedImageLoader loader, ID id, Controller controller) {
 		super(x, y, id);
-		this.gameObjectList = gameObjectList;
 		
 		player = loader.loadImage("/Sprites/bgbattleship.png");
+		gameObjectList = controller.getGameObjectList();
 	}
 	
 	public void tick() {
@@ -30,8 +30,14 @@ public class Player extends GameObject{
 		if(y <= 0) y = 0;
 		else if(y >= Game.HEIGHT * Game.SCALE - 65) y = (Game.HEIGHT * Game.SCALE) - 65;
 		
-		if(Physics.collision(this, gameObjectList)) {
-			// health bar stuff
+		for(int i = 0; i < gameObjectList.size(); i++) {
+			
+			GameObject tempObject = gameObjectList.get(i);
+			if(Physics.collision(this, tempObject)) {
+				// health stuff
+				System.out.println("COLLISION");
+			}
+			
 		}
 	}
 	

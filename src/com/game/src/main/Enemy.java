@@ -3,6 +3,7 @@ package com.game.src.main;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Enemy extends GameObject {
@@ -12,6 +13,7 @@ public class Enemy extends GameObject {
 	private double speed = r.nextDouble() * (0.4) + 0.1;
 	private Controller controller;
 	private HUD hud;
+	private LinkedList<GameObject> gameObjectList;
 	
 	public Enemy(double x, double y, BufferedImageLoader loader, ID id, Controller controller, HUD hud) {
 		super(x, y, id);
@@ -20,6 +22,7 @@ public class Enemy extends GameObject {
 		this.hud = hud;
 		
 		enemy = loader.loadImage("/Sprites/roundysh.png");
+		gameObjectList = controller.getGameObjectList();
 	}
 	
 	public void tick() {
@@ -30,10 +33,17 @@ public class Enemy extends GameObject {
 		y += speed;
 		this.setY(y);
 		
-		if(Physics.collision(this, controller.getGameObjectList())) {
-			controller.removeGameObject(this); // removes enemy
-			hud.setEnemiesKilled(hud.getEnemiesKilled() + 1); // increments enemy count by 1
-			hud.setRealEnemiesKilled(hud.getRealEnemiesKilled() + 1);
+		for(int i = 0; i < gameObjectList.size(); i++) {
+			
+			GameObject tempObject = gameObjectList.get(i);
+			
+			if(Physics.collision(this, tempObject)) {
+				controller.removeGameObject(tempObject);
+				controller.removeGameObject(this); // removes enemy
+				hud.setEnemiesKilled(hud.getEnemiesKilled() + 1); // increments enemy count by 1
+				hud.setRealEnemiesKilled(hud.getRealEnemiesKilled() + 1);
+			}
+			
 		}
 	}
 	
