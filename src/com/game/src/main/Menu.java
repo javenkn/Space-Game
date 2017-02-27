@@ -100,10 +100,6 @@ public class Menu extends MouseAdapter{
 			g.setColor(Color.WHITE);
 			g.drawString("Space Invasion", ShiftEast(x, 5), ShiftSouth(y, 5));
 			
-//			g.setFont(font);
-			g.setColor(Color.white);
-//			g.drawString("Space Invasion", 130, 70);
-			
 			g.setFont(font2);
 			g.drawRect(220, 150, 200, 64);
 			g.drawString("Play", 288, 190);
