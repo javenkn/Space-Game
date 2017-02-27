@@ -30,7 +30,8 @@ public class Game extends Canvas implements Runnable{
 	public enum STATE {
 		Menu,
 		Help,
-		Game
+		Game,
+		End
 	};
 	
 	public static STATE gameState = STATE.Menu;
@@ -40,7 +41,7 @@ public class Game extends Canvas implements Runnable{
 		hud = new HUD();
 		loader = new BufferedImageLoader();
 		controller = new Controller(loader, hud);
-		menu = new Menu();
+		menu = new Menu(hud);
 		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader, ID.Player, controller, hud);
 		
 		background = loader.loadImage("/Sprites/starstars.jpg");
@@ -111,6 +112,12 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game) {
 			controller.tick();
 			player.tick();
+			
+			if(HUD.HEALTH <= 0) {
+				HUD.HEALTH = 100;
+				gameState = STATE.End;
+			}
+			
 			if(hud.getEnemiesKilled() >= hud.getEnemyCount()) {
 				hud.setEnemyCount(hud.getEnemyCount() + 2);
 				hud.setEnemiesKilled(0);
@@ -135,7 +142,7 @@ public class Game extends Canvas implements Runnable{
 			controller.render(g);
 			player.render(g);
 			hud.render(g);
-		} else if(gameState == STATE.Menu || gameState == STATE.Help) {
+		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
 			menu.render(g);
 		}
 		

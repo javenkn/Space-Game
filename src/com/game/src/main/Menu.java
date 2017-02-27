@@ -10,6 +10,12 @@ import com.game.src.main.Game.STATE;
 
 public class Menu extends MouseAdapter{
 
+	private HUD hud;
+
+	public Menu(HUD hud) {
+		this.hud = hud;
+	}
+	
 	private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
 		if(mx > x && mx < x + width) {
 			if(my > y && my < y + height) {
@@ -51,6 +57,19 @@ public class Menu extends MouseAdapter{
 				return;
 			}
 		}
+		
+		// try again button
+		if(Game.gameState == STATE.End) {
+			if(mouseOver(mx, my, 220, 250, 200, 64)) {
+				Game.gameState = STATE.Game;
+				hud.setEnemiesKilled(0);
+				hud.setRealEnemiesKilled(0);
+			} else if(mouseOver(mx, my, 220, 350, 200, 64)) {
+				Game.gameState = STATE.Menu;
+				hud.setEnemiesKilled(0);
+				hud.setRealEnemiesKilled(0);
+			}
+		}
 	}
 	
 	public void render(Graphics g) {
@@ -88,6 +107,28 @@ public class Menu extends MouseAdapter{
 			g.setColor(Color.white);
 			g.drawRect(220, 350, 200, 64);
 			g.drawString("Back", 284, 390);
+		} else if(Game.gameState == STATE.End) {
+			Font font = new Font("arial", 1, 50);
+			Font font2 = new Font("arial", 1, 30);
+			Font font3 = new Font("arial", 1, 20);
+			
+			g.setFont(font);
+			g.setColor(Color.white);
+			g.drawString("Game Over", 180, 70);
+			
+			g.setFont(font3);
+			if(hud.getRealEnemiesKilled() != 1) {
+				g.drawString("You killed " + hud.getRealEnemiesKilled() + " enemies.", 210, 200);
+			} else {
+				g.drawString("You killed " + hud.getRealEnemiesKilled() + " enemy.", 210, 200);
+			}
+			
+			g.setFont(font2);
+			g.drawRect(220, 250, 200, 64);
+			g.drawString("Try Again", 250, 290);
+			
+			g.drawRect(220, 350, 200, 64);
+			g.drawString("Main Menu", 243, 390);
 		}
 	}
 }
