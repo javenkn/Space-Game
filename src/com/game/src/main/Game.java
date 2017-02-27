@@ -21,7 +21,6 @@ public class Game extends Canvas implements Runnable{
 	
 	private BufferedImageLoader loader;
 	
-	private Player player;
 	private Controller controller;
 	private BufferedImage background;
 	private HUD hud;
@@ -41,12 +40,11 @@ public class Game extends Canvas implements Runnable{
 		hud = new HUD();
 		loader = new BufferedImageLoader();
 		controller = new Controller(loader, hud);
-		menu = new Menu(hud);
-		player = new Player(((WIDTH*SCALE)/2) - 30, 350, loader, ID.Player, controller, hud);
+		menu = new Menu(controller, hud, loader);
 		
 		background = loader.loadImage("/Sprites/starstars.jpg");
 		// attaches keyboard listener
-		this.addKeyListener(new KeyInput(player, controller));
+		this.addKeyListener(new KeyInput(controller));
 		this.addMouseListener(menu);
 	}
 	
@@ -111,7 +109,6 @@ public class Game extends Canvas implements Runnable{
 	private void tick() {
 		if(gameState == STATE.Game) {
 			controller.tick();
-			player.tick();
 			
 			if(HUD.HEALTH <= 0) {
 				HUD.HEALTH = 100;
@@ -140,7 +137,6 @@ public class Game extends Canvas implements Runnable{
 		
 		if(gameState == STATE.Game) { // game state
 			controller.render(g);
-			player.render(g);
 			hud.render(g);
 		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End) {
 			menu.render(g);

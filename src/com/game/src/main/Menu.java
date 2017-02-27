@@ -11,9 +11,13 @@ import com.game.src.main.Game.STATE;
 public class Menu extends MouseAdapter{
 
 	private HUD hud;
+	private Controller controller;
+	private BufferedImageLoader loader;
 
-	public Menu(HUD hud) {
+	public Menu(Controller controller, HUD hud, BufferedImageLoader loader) {
+		this.controller = controller;
 		this.hud = hud;
+		this.loader = loader;
 	}
 	
 	private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
@@ -32,7 +36,8 @@ public class Menu extends MouseAdapter{
 			// play button
 			if(mouseOver(mx, my, 220, 150, 200, 64)) {
 				Game.gameState = STATE.Game;
-				
+				controller.addGameObject(new Player(((Game.WIDTH*Game.SCALE)/2) - 30, 350, loader, ID.Player, controller, hud));
+				controller.createEnemies(hud.getEnemyCount());
 //				AudioPlayer.getSound("sound").play();
 				return;
 			}
@@ -60,14 +65,20 @@ public class Menu extends MouseAdapter{
 		
 		// try again button
 		if(Game.gameState == STATE.End) {
-			if(mouseOver(mx, my, 220, 250, 200, 64)) {
+			if(mouseOver(mx, my, 220, 250, 200, 64)) { // pressed try again button
 				Game.gameState = STATE.Game;
 				hud.setEnemiesKilled(0);
 				hud.setRealEnemiesKilled(0);
-			} else if(mouseOver(mx, my, 220, 350, 200, 64)) {
+				hud.setEnemyCount(5);
+				controller.clearAll();
+				controller.addGameObject(new Player(((Game.WIDTH*Game.SCALE)/2) - 30, 350, loader, ID.Player, controller, hud));
+				controller.createEnemies(hud.getEnemyCount());
+			} else if(mouseOver(mx, my, 220, 350, 200, 64)) { // pressed back to main menu
 				Game.gameState = STATE.Menu;
 				hud.setEnemiesKilled(0);
 				hud.setRealEnemiesKilled(0);
+				hud.setEnemyCount(5);
+				controller.clearAll();
 			}
 		}
 	}
@@ -120,7 +131,7 @@ public class Menu extends MouseAdapter{
 			if(hud.getRealEnemiesKilled() != 1) {
 				g.drawString("You killed " + hud.getRealEnemiesKilled() + " enemies.", 210, 200);
 			} else {
-				g.drawString("You killed " + hud.getRealEnemiesKilled() + " enemy.", 210, 200);
+				g.drawString("You killed " + hud.getRealEnemiesKilled() + " enemy.", 230, 200);
 			}
 			
 			g.setFont(font2);

@@ -7,9 +7,6 @@ import java.util.LinkedList;;
 
 public class Player extends GameObject{
 	
-	private double velX = 0;
-	private double velY = 0;
-	
 	private BufferedImage player;
 	private LinkedList<GameObject> gameObjectList;
 	private Controller controller;
