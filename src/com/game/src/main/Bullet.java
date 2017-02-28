@@ -3,7 +3,6 @@ package com.game.src.main;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-//import java.util.LinkedList;
 
 public class Bullet extends GameObject{
 
@@ -13,7 +12,7 @@ public class Bullet extends GameObject{
 	public Bullet(double x, double y, ID id) {
 		super(x, y, id);
 		
-		bullet = loader.loadImage("/Sprites/bullet.png");
+		bullet = loader.loadImage("/Sprites/bullet2.png");
 	}
 	
 	public void tick() {
@@ -25,6 +24,6 @@ public class Bullet extends GameObject{
 	}
 
 	public Rectangle getBounds() { // collision box
-		return new Rectangle((int) x, (int) y, 15, 29);
+		return new Rectangle((int) x, (int) y, 15, 31);
 	}
 }

@@ -6,7 +6,7 @@ public class Physics {
 		switch(entity.getID()) {
 		case Player:
 			if(entity.getBounds().intersects(comparedEntity.getBounds())) {
-				if(comparedEntity.getID() == ID.Enemy) { // if the player hits the enemy
+				if(comparedEntity.getID() == ID.Enemy || comparedEntity.getID() == ID.EnemyBullet) { // if the player hits the enemy
 					return true;
 				} else {
 					return false;

@@ -10,10 +10,11 @@ public class Enemy extends GameObject {
 	
 	private BufferedImage enemy;
 	Random r = new Random();
-	private double speed = r.nextDouble() * (0.5) + 0.2;
+	private double speed = r.nextDouble() * (0.7) + 0.2;
 	private Controller controller;
 	private HUD hud;
 	private LinkedList<GameObject> gameObjectList;
+	private int count = 0;
 	
 	public Enemy(double x, double y, BufferedImageLoader loader, ID id, Controller controller, HUD hud) {
 		super(x, y, id);
@@ -26,12 +27,18 @@ public class Enemy extends GameObject {
 	}
 	
 	public void tick() {
+		count++;
 		if(y > (Game.HEIGHT * Game.SCALE)) {
 			y = -50;
 			x = r.nextInt((Game.WIDTH * Game.SCALE) - 56);
 		}
 		y += speed;
 		this.setY(y);
+		
+		if(count == 80) {
+			controller.addGameObject(new EnemyBullet(x + 22, y + 55, ID.EnemyBullet, controller));
+			count = 0;
+		}
 		
 		for(int i = 0; i < gameObjectList.size(); i++) {
 			

@@ -18,7 +18,7 @@ public class Player extends GameObject{
 		this.controller = controller;
 		this.hud = hud;
 		
-		player = loader.loadImage("/Sprites/bgbattleship.png");
+		player = loader.loadImage("/Sprites/alienspaceship.png");
 		gameObjectList = controller.getGameObjectList();
 	}
 	
@@ -30,7 +30,7 @@ public class Player extends GameObject{
 		else if(x >= Game.WIDTH * Game.SCALE - 50) x = (Game.WIDTH * Game.SCALE) - 50;
 		
 		if(y <= 0) y = 0;
-		else if(y >= Game.HEIGHT * Game.SCALE - 65) y = (Game.HEIGHT * Game.SCALE) - 65;
+		else if(y >= Game.HEIGHT * Game.SCALE - 74) y = (Game.HEIGHT * Game.SCALE) - 74;
 		
 		for(int i = 0; i < gameObjectList.size(); i++) {
 			
@@ -39,7 +39,9 @@ public class Player extends GameObject{
 				// health stuff
 				controller.removeGameObject(tempObject); // removes bullet when collision happens
 				HUD.HEALTH -= 10;
-				hud.setEnemiesKilled(hud.getEnemiesKilled() + 1);
+				if(tempObject.getID() == ID.Enemy) {
+					hud.setEnemiesKilled(hud.getEnemiesKilled() + 1);
+				}
 			}
 			
 		}
@@ -68,6 +70,6 @@ public class Player extends GameObject{
 	}
 	
 	public Rectangle getBounds() { // collision box
-		return new Rectangle((int) x, (int) y, 50, 65);
+		return new Rectangle((int) x, (int) y, 50, 74);
 	}
 }

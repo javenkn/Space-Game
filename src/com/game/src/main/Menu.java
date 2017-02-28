@@ -69,7 +69,7 @@ public class Menu extends MouseAdapter{
 				Game.gameState = STATE.Game;
 				hud.setEnemiesKilled(0);
 				hud.setRealEnemiesKilled(0);
-				hud.setEnemyCount(5);
+				hud.setEnemyCount(3);
 				controller.clearAll();
 				controller.addGameObject(new Player(((Game.WIDTH*Game.SCALE)/2) - 30, 350, loader, ID.Player, controller, hud));
 				controller.createEnemies(hud.getEnemyCount());
@@ -77,7 +77,7 @@ public class Menu extends MouseAdapter{
 				Game.gameState = STATE.Menu;
 				hud.setEnemiesKilled(0);
 				hud.setRealEnemiesKilled(0);
-				hud.setEnemyCount(5);
+				hud.setEnemyCount(3);
 				controller.clearAll();
 			}
 		}

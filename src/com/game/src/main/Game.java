@@ -114,6 +114,7 @@ public class Game extends Canvas implements Runnable{
 		if(gameState == STATE.Game) {
 			if(!paused) {
 				controller.tick();
+				hud.tick();
 				
 				if(HUD.HEALTH <= 0) {
 					HUD.HEALTH = 100;
@@ -156,6 +157,15 @@ public class Game extends Canvas implements Runnable{
 		
 		g.dispose(); // shows the graphics
 		bs.show();
+	}
+	
+	public static float clamp(float var, float min, float max) {
+		if(var >= max) 
+			return var = max;
+		else if(var <= min)
+			return var = min;
+		else
+			return var;
 	}
 	
 	public static void main(String args[]) {

@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class HUD {
 	
-	private int enemyCount = 1;
+	private int enemyCount = 3;
 	private int realEnemiesKilled = 0;
 	private int enemiesKilled = 0;
 	
@@ -14,7 +14,9 @@ public class HUD {
 	public int bounds = 0;
 	
 	public void tick() {
-		
+		HEALTH = Game.clamp(HEALTH, 0, 100+(bounds/2));
+		greenValue = HEALTH * 2;
+		greenValue = Game.clamp(greenValue, 0, 255);
 	}
 	
 	public void render(Graphics g) {
