@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 public class HUD {
 	
-	private int enemyCount = 5;
+	private int enemyCount = 1;
 	private int realEnemiesKilled = 0;
 	private int enemiesKilled = 0;
 	

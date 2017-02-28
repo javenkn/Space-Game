@@ -10,7 +10,7 @@ public class Enemy extends GameObject {
 	
 	private BufferedImage enemy;
 	Random r = new Random();
-	private double speed = r.nextDouble() * (0.4) + 0.1;
+	private double speed = r.nextDouble() * (0.5) + 0.2;
 	private Controller controller;
 	private HUD hud;
 	private LinkedList<GameObject> gameObjectList;
@@ -27,7 +27,7 @@ public class Enemy extends GameObject {
 	
 	public void tick() {
 		if(y > (Game.HEIGHT * Game.SCALE)) {
-			y = 0;
+			y = -50;
 			x = r.nextInt((Game.WIDTH * Game.SCALE) - 56);
 		}
 		y += speed;

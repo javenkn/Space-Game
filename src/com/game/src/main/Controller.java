@@ -37,7 +37,7 @@ public class Controller {
 	
 	public void createEnemies(int enemies) {
 		for(int i = 0; i < enemies; i++) {
-			addGameObject(new Enemy(r.nextInt((Game.WIDTH * Game.SCALE) - 56), 0, loader, ID.Enemy, this, hud));
+			addGameObject(new Enemy(r.nextInt((Game.WIDTH * Game.SCALE) - 56), -50, loader, ID.Enemy, this, hud));
 		}
 	}
 	
